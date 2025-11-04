@@ -12,6 +12,7 @@ This repository captures the engineering principles, guardrails, and checklists 
 - `principles/code-style.md` — naming, formatting, and documentation expectations.
 - `principles/project-structure.md` — domain-driven layering guide for controllers, facades, logic, services, adapters, and repos.
 - `principles/testing.md` — guidance for test strategy, coverage, and tooling.
+- `principles/error-handling.md` — canonical error taxonomy and error-code format.
 - `principles/process.md` — collaboration workflow, version control, and review etiquette.
 - `principles/ai-collaboration.md` — best practices for working alongside AI coding assistants.
 
