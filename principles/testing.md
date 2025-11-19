@@ -12,6 +12,12 @@ Tests provide confidence that code satisfies requirements today and tomorrow. Ba
 - **Integration tests** cover module boundaries, data stores, and network calls. Stub external services unless explicitly testing integrations.
 - **End-to-end (E2E) tests** verify user journeys. Limit scope to the highest-value flows and run on CI/CD, not every commit.
 
+### Integration Test Environment Expectations
+- Triggering the integration suite should bootstrap a complete local ecosystem via Docker (MongoDB, PostgreSQL, RabbitMQ, and any other required dependencies) so tests interact with realistic infrastructure without touching shared environments.
+- Persist integration-test telemetry and assertions into a dedicated local MongoDB database so historical runs can be inspected, replayed, or mined for flaky behavior.
+- Document the schema of that results database so future automation can query it consistently.
+- Plan for an internal agent that reads the stored test outcomes and translates failures into actionable TODO items; start capturing the metadata (test name, failure mode, suggested subsystem) the agent will need even before the agent exists.
+
 ## Writing Quality Tests
 - Name tests to describe behavior (`does_x_when_y`), not implementation.
 - Arrange using AAA (Arrange, Act, Assert) or Given/When/Then conventions; keep setup reusable with fixtures/factories.
