@@ -45,3 +45,8 @@ Map between these forms explicitly: controllers and consumers convert DTOs or ev
 - Repos interact with databases or query builders; they should expose the minimal surface required by services.
 
 Enforce this dependency direction in reviews and automate boundary checks (lint rules, module boundaries) wherever tooling allows.
+
+## Data Access and Transactions
+- Default read-only API flows (`get*`, `find*`, `list*`) to **read-uncommitted** isolation so callers are never blocked by in-flight writes. Apply the necessary query hints or connection-level settings in the repo layer and document any datastore-specific caveats.
+- Wrap every create, update, or delete operation in an explicit transaction managed by the service layer. Keep the transaction scope tight, ensure all participating repo calls share the same context, and roll back on any failure to preserve atomicity.
+- Surface transaction boundaries through well-named helpers so reviewers can audit that writes are protected while read operations remain lock-free.
